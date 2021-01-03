@@ -12,7 +12,7 @@ PyBank
     
     Max monthly change
    
-   Min monthly change
+    Min monthly change
     
   Print the summary level data to a text file and store.
 
