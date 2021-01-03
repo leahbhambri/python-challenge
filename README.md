@@ -1,6 +1,6 @@
 # python-challenge
 
-PyBank
+#PyBank
 
   Create a python script to read a csv file and summarize profit and loss data over various months. Summary data should include the following:
   
@@ -16,7 +16,8 @@ PyBank
     
   Print the summary level data to a text file and store.
 
-PyPoll
+
+#PyPoll
 
   Create a python script to read a csv file of election data for a small town and summarize each candidates results.
   
