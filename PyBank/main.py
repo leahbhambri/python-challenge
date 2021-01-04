@@ -3,9 +3,9 @@ import os
 import csv
 
 # open csv file
-budget_csv = os.path.join("..", "Resources", "budget_data.csv")
+budget_data.csv = os.path.join("..", "Resources", "budget_data.csv")
 
-with open(budget_csv) as csvfile:
+with open(budget_data.csv) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
     #skip header row
@@ -13,8 +13,8 @@ with open(budget_csv) as csvfile:
 
     #define variables
     month = 0
-    netprofit = 0
-    previousday = 0
+    net_profit = 0
+    previous_day = 0
     change = 0
 
     #define list for change values
@@ -28,28 +28,45 @@ with open(budget_csv) as csvfile:
 
         #define netprofit total
         profit_loss = (row[1])
-        netprofit = netprofit + profit_loss
+        net_profit = net_profit + profit_loss
 
         #append change figure to the list and save updated value
-        change = profit_loss - previousday
+        change = profit_loss - previous_day
         changelist.append(change)
+
+        #define previousday variable
+        previous_day=profit_loss
     
-    #find max value of changelist
+    #find average change of changelist values using method found at "https://www.geeksforgeeks.org/find-average-list-python/"
+    def average(changelist):
+        return sum(changelist)/len(changelist)
+        average_change = average(changelist)
+
+    # #find max value of changelist
+    max_change = max(changelist)
+    max_change_row = changelist.index(max_change)
 
     #find min value of changelist
-
-    #create loop to find max and min values in list and print the corresponding dates
+    min_change = min(changelist)
+    min_change_row = changelist.index(min_change)
+    
+    #****create loop to find max and min values in list and print the corresponding dates
     for row in csvreader:
-        if row[1] == maxchange
-            maxdate = row[0] 
+        if row[1] == max_change
+            max_date = row[0] 
 
-        if row[1] == minchange
-            mindate = row[0]       
+        elif row[1] == min_change
+            min_date = row[0]       
         
     #print Analysis statement
     print ("Financial Analysis")
     print ("Total Months: " + month)
-    print ("Total: $" + netprofit)
-    print ("Average Change: $" + averagechange)
-    print ("Greatest Increase in Profits: " + maxdate + maxchange)
-    print ("Greatest Increase in Profits: " + mindate + minchange)
+    print ("Total: $" + net_profit)
+    print ("Average Change: $" + average_change)
+    print ("Greatest Increase in Profits: " + max_date + max_change)
+    print ("Greatest Increase in Profits: " + min_date + min_change)
+
+
+#OPTION - write changelist to the csv file
+for item in changelist:
+    write to the csv
