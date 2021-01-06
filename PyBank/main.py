@@ -5,6 +5,9 @@ import csv
 # open csv file
 csvpath = os.path.join("Resources", "budget_data.csv")
 
+# Specify the file to write to
+output_path = os.path.join("PyBank_Analysis", "pybank_analysis.txt")
+
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
@@ -42,7 +45,7 @@ with open(csvpath) as csvfile:
                 first_row = False
                 continue
         changelist.append(change)
-        
+
     #find average change of changelist values using method found at "https://www.guru99.com/find-average-list-python.html/"
     def average(num):
         return sum(num)/len(num)
@@ -62,9 +65,10 @@ with open(csvpath) as csvfile:
    
     #****create loop to find max and min values in list and print the corresponding dates
     row_count = 1
-    max_date = 0
-    min_date = 0
+    max_date = ""
+    min_date = ""
 
+    print()
     for row in csvreader:
         
         row_count = row_count + 1
@@ -74,36 +78,19 @@ with open(csvpath) as csvfile:
 
         elif row_count == min_change_row:
             min_date = str(row[0])     
-        
-    #print Analysis statement
-    # analysis_text = (f'{month} Financial Analysis \n
-    # "----------------------------- \n"
-    # "Total Months: {month} \n"
-    # "Total: $ {net_profit} \n"
-    # "Average Change: $ {average_change} \n"
-    # "Greatest Increase in Profits: {max_date} {max_change} \n"
-    # "Greatest Decrease in Profits: {min_date} {min_change} \n")
+
+# Open the file using "write" mode. Specify the variable to hold the contents
+with open(output_path, 'w', newline='') as txtfile:
 
     # print(analysis_text)
-
-    print ("Total Months: " + str(month))
-    print ("Total: $" + str(net_profit))
-    print ("Average Change: $" + str(average_change))
-    # # print (str(max_change)+ "   " + str(max_change_row))
-    # # print (str(min_change)+"    " + str(min_change_row))
-    print ("Greatest Increase in Profits: " + str(max_date) +"  " + str(max_change))
-    print ("Greatest Increase in Profits: " + str(min_date) + "  " + str(min_change))
-
-
-    # # Specify the file to write to
-    # output_path = os.path.join("PyBank_Analysis", "pybank_analysis.txt")
-
-    # # Open the file using "write" mode. Specify the variable to hold the contents
-    # with open(output_path, 'w', newline='') as txtfile:
-
-    #     # Initialize csv.writer
-    #     txtwriter = txt.writer(txtfile, delimiter=',')
-
-    #     # Write the print statement using f method***
-    #     txtwriter.write(f'{("Financial Analysis \n Total Months:" month "\n Total: $" net_profit "\n Average Change: $" average_change "\n Greatest Increase in Profits: " max_date max_change "\n Greatest Increase in Profits: " min_date min_change)}')
-
+    analysis_statement = (
+        f"\n\nFinancial Analysis\n"
+        f"-------------------------\n"
+        f"Total Months: {month}\n"
+        f"Total: $ {net_profit}\n"
+        f"Average Change: $ {average_change}\n"
+        f"Greatest Increase in Profits: {max_date} $ {max_change}\n"
+        f"Greatest Decrease in Profits: {min_date} $ {min_change}\n"
+        f"-------------------------\n")
+    print (analysis_statement)
+    txtfile.write(analysis_statement)
